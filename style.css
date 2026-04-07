@@ -1,0 +1,206 @@
+/* =========================================
+   SHADOW TRAVELER - VERSIÓN PESADILLA
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap');
+
+:root {
+    --bg-base: #050000;        /* Negro con un micro-toque de rojo sangre seca */
+    --bg-surface: #0a0000;     /* Rojo extremadamente oscuro */
+    --text-main: #b8a9a9;      /* Gris sucio/enfermizo */
+    --text-muted: #6b5252;     /* Texto secundario marchito */
+    --accent-glow: #8a0303;    /* Rojo sangre intenso */
+    --accent-dark: #3a0000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-glow); }
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Efecto Viñeta Asfixiante y Ruido Estático */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    box-shadow: inset 0 0 200px rgba(0,0,0,1);
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
+    pointer-events: none;
+    z-index: 9999;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(138, 3, 3, 0.1);
+}
+
+.logo {
+    color: #fff;
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--accent-glow);
+    animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px var(--accent-glow); }
+    20%, 22%, 24%, 55% { opacity: 0.2; text-shadow: none; }
+}
+
+nav ul { list-style: none; display: flex; gap: 40px; }
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+nav a:hover { color: #ff0000; text-shadow: 0 0 15px red; }
+
+/* --- HERO --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a0101 0%, #000 70%);
+}
+
+.glitch-text {
+    font-size: 6rem;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0px rgba(138, 3, 3, 0.5), -3px -3px 0px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 50px;
+    color: #8c7373;
+    font-style: italic;
+}
+
+/* --- BOTÓN DE DESCARGA (LATIDO TURBIO) --- */
+.action-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-download {
+    padding: 18px 50px;
+    background: rgba(138, 3, 3, 0.1);
+    color: #fff;
+    border: 1px solid var(--accent-glow);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(138, 3, 3, 0.3) inset;
+    animation: heartbeat 2s infinite;
+    transition: all 0.2s;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); box-shadow: 0 0 20px rgba(138, 3, 3, 0.3) inset, 0 0 10px rgba(138,3,3,0.2); }
+    15% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 0, 0, 0.6) inset, 0 0 20px rgba(255,0,0,0.5); }
+    30% { transform: scale(1); box-shadow: 0 0 20px rgba(138, 3, 3, 0.3) inset, 0 0 10px rgba(138,3,3,0.2); }
+    45% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 0, 0, 0.6) inset, 0 0 20px rgba(255,0,0,0.5); }
+    100% { transform: scale(1); }
+}
+
+.btn-download:hover {
+    background: var(--accent-glow);
+    color: #000;
+    text-shadow: 0 0 5px #fff;
+    animation: none; /* Se detiene al pasar el ratón */
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #ff0000;
+}
+
+/* --- LORE --- */
+.lore {
+    padding: 120px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.lore h2 { font-size: 3rem; color: #fff; margin-bottom: 20px; }
+.lore p { font-size: 1.1rem; color: var(--text-main); margin-bottom: 20px; }
+
+/* --- CARACTERÍSTICAS --- */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 20px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #030000;
+    border: 1px solid #1a0000;
+    padding: 40px 30px;
+    width: 320px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    background: #0a0000;
+    border-color: var(--accent-glow);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(138, 3, 3, 0.2);
+}
+
+.card h3 { color: #fff; margin-bottom: 15px; font-size: 1.5rem; }
+.card p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #000;
+    border-top: 1px solid #111;
+    color: #444;
+}
+
+@media (max-width: 768px) {
+    .glitch-text { font-size: 3.5rem; }
+    nav ul { display: none; }
+}
